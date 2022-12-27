@@ -37,11 +37,6 @@ public class DoctorController {
         return doctorService.fetchPatientListByDoctorId(id);
     }
 
-    @GetMapping("/patients_by_doctor_id/{id}")
-    public Set<Patient> fetchPatientByDoctorId(@PathVariable("id") Long id) {
-        return doctorService.fetchPatientListByDoctorId(id);
-    }
-
     @PutMapping("/doctor/{id}")
     public Doctor updateDoctor(@Valid @RequestBody Doctor doctor, @PathVariable("id") Long doctorId) {
         return doctorService.updateDoctorDetails(doctor, doctorId);
