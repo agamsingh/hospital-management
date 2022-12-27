@@ -19,15 +19,19 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
+    @Column(name = "doctor_id")
     private Long id;
     @NotNull
     private String name;
     @NotNull
+    @Column(name = "email",unique = true, nullable=false)
     private String email;
     private String degree;
     private String specialization;
     private String department;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_doctor_id", referencedColumnName = "doctor_id")
     private Set<Patient> patients;
 
     public Long getId() {

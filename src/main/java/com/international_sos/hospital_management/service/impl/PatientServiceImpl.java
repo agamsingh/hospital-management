@@ -1,7 +1,6 @@
 package com.international_sos.hospital_management.service.impl;
 
 import com.international_sos.hospital_management.entity.Patient;
-import com.international_sos.hospital_management.exception.BadRequestException;
 import com.international_sos.hospital_management.exception.NotFoundException;
 import com.international_sos.hospital_management.respository.PatientRepository;
 import com.international_sos.hospital_management.service.PatientService;
@@ -25,13 +24,6 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private HospitalHelper helper;
-
-    @Override
-    public Patient persistPatient(Patient patient) throws BadRequestException {
-        helper.validatePatientData(patient);
-        log.info("Patient data validated : " + patient.toString());
-        return patientRepository.save(patient);
-    }
 
     @Override
     public List<Patient> fetchAllPatient() {
@@ -68,9 +60,6 @@ public class PatientServiceImpl implements PatientService {
                     }
                     if (Objects.nonNull(newPatient.getAge())){
                         updatedPatientDetails.setAge(newPatient.getAge());
-                    }
-                    if (Objects.nonNull(newPatient.getDoctor())){
-                        updatedPatientDetails.setDoctor(newPatient.getDoctor());
                     }
                     log.info("patient details updated for id : "+ patientId);
                     return patientRepository.save(updatedPatientDetails);

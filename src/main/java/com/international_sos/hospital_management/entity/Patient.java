@@ -22,14 +22,11 @@ public class Patient {
     @NotNull
     private String name;
     @NotNull
+    @Column(name = "email",unique = true, nullable=false)
     private String email;
     private Long age;
     @NotNull
     private String contactNo;
-
-    @ManyToOne
-    @JoinColumn(name="doctor_id", nullable=false)
-    private Doctor doctor;
 
     public Long getId() { return id; }
 
@@ -59,14 +56,6 @@ public class Patient {
         this.contactNo = contactNo;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
     public Long getAge() { return age; }
 
     public void setAge(Long age) { this.age = age; }
@@ -79,7 +68,6 @@ public class Patient {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", contact_no='" + contactNo + '\'' +
-                ", doctor=" + doctor +
                 '}';
     }
 }

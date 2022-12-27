@@ -2,6 +2,7 @@ package com.international_sos.hospital_management.service.impl;
 
 import com.international_sos.hospital_management.entity.Doctor;
 import com.international_sos.hospital_management.entity.Patient;
+import com.international_sos.hospital_management.exception.AlreadyExistsException;
 import com.international_sos.hospital_management.exception.NotFoundException;
 import com.international_sos.hospital_management.respository.DoctorRepository;
 import com.international_sos.hospital_management.service.DoctorService;
@@ -31,7 +32,11 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor persistDoctor(Doctor doctor) {
         helper.validateDoctorData(doctor);
         log.info("Doctors Data validated : " + doctor.toString());
-        return doctorRepository.save(doctor);
+        try{
+            return doctorRepository.save(doctor);
+        }catch (Exception e){
+            throw new AlreadyExistsException("Data Already present for doctor with id :"+ doctor.getId());
+        }
     }
 
     @Override
@@ -60,7 +65,7 @@ public class DoctorServiceImpl implements DoctorService {
                     if (Objects.nonNull(newdoctor.getName()) && !"".equalsIgnoreCase(newdoctor.getName())){
                         updatedDoctorDetails.setName(newdoctor.getName());
                     }
-                    if (helper.validateEmail(newdoctor.getEmail())){
+                    if (Objects.nonNull(newdoctor.getDegree()) && helper.validateEmail(newdoctor.getEmail())){
                         updatedDoctorDetails.setEmail(newdoctor.getEmail());
                     }
                     if (Objects.nonNull(newdoctor.getDegree()) && !"".equalsIgnoreCase(newdoctor.getDegree())) {
@@ -72,6 +77,9 @@ public class DoctorServiceImpl implements DoctorService {
                     if (Objects.nonNull(newdoctor.getDepartment()) && !"".equalsIgnoreCase(newdoctor.getDepartment())) {
                         updatedDoctorDetails.setDepartment(newdoctor.getDepartment());
                     }
+                    Set<Patient> patientSet = updatedDoctorDetails.getPatients();
+                    newdoctor.getPatients().stream().forEach(patient -> { patientSet.add(patient); });
+                    updatedDoctorDetails.setPatients(patientSet);
                     log.info("doctor details updated for id : "+ doctorId);
                     return doctorRepository.save(updatedDoctorDetails);
                 }).orElseGet(() -> {

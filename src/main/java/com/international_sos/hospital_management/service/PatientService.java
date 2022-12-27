@@ -7,8 +7,6 @@ import java.util.List;
 public interface PatientService {
 
     // CRUD opperation for patient entity
-    // create patient entity
-    Patient persistPatient(Patient patient) ;
     // fetch all patients list
     List<Patient> fetchAllPatient();
     // fetch patient by id
