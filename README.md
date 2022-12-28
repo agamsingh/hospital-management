@@ -1,7 +1,6 @@
 # Hospital Management System
 
-**Summary**\
-API Implented for CRUD operations for doctor and patient.
+Hospital Management system handles all patient and doctor data. In this project we have implented API for CRUD operations for doctor and patient.
 
 ## Run the System
 We can easily run the whole with only a single command:
