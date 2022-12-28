@@ -35,7 +35,8 @@ public class DoctorServiceImpl implements DoctorService {
         try{
             return doctorRepository.save(doctor);
         }catch (Exception e){
-            throw new AlreadyExistsException("Data Already present for doctor with id :"+ doctor.getId());
+            log.error("Data Already present :"+ e.getMessage());
+            throw new AlreadyExistsException("Data Already present :"+ e.getMessage());
         }
     }
 
