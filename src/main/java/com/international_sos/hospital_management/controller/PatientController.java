@@ -2,9 +2,9 @@ package com.international_sos.hospital_management.controller;
 
 import com.international_sos.hospital_management.entity.Patient;
 import com.international_sos.hospital_management.service.PatientService;
-import com.international_sos.hospital_management.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,18 +18,18 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping("/patients")
-    public Response<List<Patient>> fetchPatients() {
-       return new Response<>(patientService.fetchAllPatient(), HttpStatus.FOUND);
+    public ResponseEntity<List<Patient>> fetchPatients() {
+       return ResponseEntity.status(HttpStatus.FOUND).body(patientService.fetchAllPatient());
     }
 
     @GetMapping("/patient/{id}")
-    public Response<Patient> fetchPatientById(@PathVariable("id") Long id) {
-        return new Response<>(patientService.fetchPatientById(id), HttpStatus.FOUND);
+    public ResponseEntity<Patient> fetchPatientById(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(patientService.fetchPatientById(id));
     }
 
     @PutMapping("/patient/{id}")
-    public Response<Patient> updateDoctor(@Valid @RequestBody Patient patient, @PathVariable("id") Long patientId) {
-        return new Response<>(patientService.updatePatientDetails(patient, patientId), HttpStatus.CREATED);
+    public ResponseEntity<Patient> updateDoctor(@Valid @RequestBody Patient patient, @PathVariable("id") Long patientId) {
+        return ResponseEntity.status(HttpStatus.OK).body(patientService.updatePatientDetails(patient, patientId));
     }
 
     @DeleteMapping("/patient/{id}")

@@ -3,9 +3,9 @@ package com.international_sos.hospital_management.controller;
 import com.international_sos.hospital_management.entity.Doctor;
 import com.international_sos.hospital_management.entity.Patient;
 import com.international_sos.hospital_management.service.DoctorService;
-import com.international_sos.hospital_management.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,28 +20,28 @@ public class DoctorController {
     private DoctorService doctorService;
 
     @PostMapping("/doctor")
-    public Response<Doctor> SaveDoctor(@Valid @RequestBody Doctor doctor) {
-            return new Response<>(doctorService.persistDoctor(doctor), HttpStatus.CREATED);
+    public ResponseEntity<Doctor> SaveDoctor(@Valid @RequestBody Doctor doctor) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.persistDoctor(doctor));
     }
 
     @GetMapping("/doctors")
-    public Response<List<Doctor>> fetchDoctors() {
-        return new Response<>(doctorService.fetchAllDoctors(), HttpStatus.FOUND);
+    public ResponseEntity<List<Doctor>> fetchDoctors() {
+        return ResponseEntity.status(HttpStatus.FOUND).body(doctorService.fetchAllDoctors());
     }
 
     @GetMapping("/doctor/{id}")
-    public Response<Doctor> fetchDoctorById(@PathVariable("id") Long id) {
-        return new Response<>(doctorService.fetchDoctorDetailsById(id), HttpStatus.FOUND);
+    public ResponseEntity<Doctor> fetchDoctorById(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(doctorService.fetchDoctorDetailsById(id));
     }
 
     @GetMapping("/patient_by_doctor_id/{id}")
-    public Response<Set<Patient>> fetchPatientListByDoctorId(@PathVariable("id") Long id) {
-        return new Response<>(doctorService.fetchPatientListByDoctorId(id), HttpStatus.FOUND );
+    public ResponseEntity<Set<Patient>> fetchPatientListByDoctorId(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.FOUND).body(doctorService.fetchPatientListByDoctorId(id));
     }
 
     @PutMapping("/doctor/{id}")
-    public Response<Doctor> updateDoctor(@Valid @RequestBody Doctor doctor, @PathVariable("id") Long doctorId) {
-        return new Response<>(doctorService.updateDoctorDetails(doctor, doctorId), HttpStatus.CREATED );
+    public ResponseEntity<Doctor> updateDoctor(@Valid @RequestBody Doctor doctor, @PathVariable("id") Long doctorId) {
+        return ResponseEntity.status(HttpStatus.OK).body(doctorService.updateDoctorDetails(doctor, doctorId));
     }
 
     @DeleteMapping("/doctor/{id}")
