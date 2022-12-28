@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("hospital")
+@RequestMapping("/hospital")
 public class PatientController {
 
     @Autowired

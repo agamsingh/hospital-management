@@ -82,10 +82,9 @@ public class DoctorServiceImpl implements DoctorService {
                     updatedDoctorDetails.setPatients(patientSet);
                     log.info("doctor details updated for id : "+ doctorId);
                     return doctorRepository.save(updatedDoctorDetails);
-                }).orElseGet(() -> {
-                    newdoctor.setId(doctorId);
-                    log.info("new doctor added with id : "+ doctorId);
-                    return doctorRepository.save(newdoctor);
+                }).orElseThrow(() -> {
+                    log.error("Doctor not found with ID : "+ doctorId);
+                    return new NotFoundException("Doctor not found with id: " + doctorId);
                 });
     }
 

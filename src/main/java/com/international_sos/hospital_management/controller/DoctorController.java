@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("hospital")
+@RequestMapping("/hospital")
 public class DoctorController {
 
     @Autowired
