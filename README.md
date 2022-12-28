@@ -25,8 +25,12 @@ If you need to stop and remove all containers, networks, and all images used by 
 ```bash
 docker-compose down --rmi all
 ```
+**Validations** -
 
-**POST Api "hospital/doctor"** - to create doctor entity.\
+**email**  - should be valid and contains special character ('@')\
+**contact number** - should be valid numeric
+
+**POST Api "hospital/doctor"** - to create doctor entity.
 ```json
 {
  "name": "test_name",
@@ -44,18 +48,19 @@ docker-compose down --rmi all
    ]
 }
 ```
-**Validations** - \
-**email**  - should be valid and contains special character ('@')\
-**contact number** - should be valid numeric
 
-**Get "hospital/doctor"** - to get all doctors\
-**Get "hospital/doctor/{id}"** -  to get doctor by id\
-**Get "hospital/patient_by_doctor_id/{id}"** - to get patient by doctor ID\
-**Put "/doctor/{id}"** - to update doctor/add patients\
-**Delete "hospital/doctor/{id}"** - to delete doctor by id and corresponding patients list(one to Many relationship)
+### Doctor's API:
+###### Read and update
+**Get "http://localhost:8080/hospital/doctor"** - to get all doctors\
+**Get "http://localhost:8080/hospital/doctor/{id}"** -  to get doctor by id\
+**Get "http://localhost:8080/hospital/patient_by_doctor_id/{id}"** - to get patient by doctor ID\
+**Put "http://localhost:8080//doctor/{id}"** - to update doctor/add patients\
+**Delete "http://localhost:8080/hospital/doctor/{id}"** - to delete doctor by id and corresponding patients list(one to Many relationship)
 
-**Get "hospital/patients"** - to get all patients\
-**Get "hospital//patient/{id}"** - to get patient by id\
-**Put "hospital/patient/{id}"**  - to update patient entity\
-**Delete "hospital/patient/{id}"** - to delete patient by id
+### Patient's API:
+###### Read and update
+**Get "http://localhost:8080/hospital/patients"** - to get all patients\
+**Get "http://localhost:8080/hospital//patient/{id}"** - to get patient by id\
+**Put "http://localhost:8080/hospital/patient/{id}"**  - to update patient entity\
+**Delete "http://localhost:8080/hospital/patient/{id}"** - to delete patient by id
 
