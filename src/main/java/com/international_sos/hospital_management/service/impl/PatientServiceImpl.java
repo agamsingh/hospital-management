@@ -63,11 +63,9 @@ public class PatientServiceImpl implements PatientService {
                     }
                     log.info("patient details updated for id : "+ patientId);
                     return patientRepository.save(updatedPatientDetails);
-                })
-                .orElseGet(() -> {
-                    newPatient.setId(patientId);
-                    log.info("new patient added with id : "+ patientId);
-                    return patientRepository.save(newPatient);
+                }).orElseThrow(() -> {
+                    log.error("Patient not found with ID : "+ patientId);
+                    return new NotFoundException("Patient not found with ID : "+ patientId);
                 }) ;
     }
 
