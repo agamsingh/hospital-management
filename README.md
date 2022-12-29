@@ -3,6 +3,9 @@
 Hospital Management system handles all patient and doctor data. In this project we have implented API for CRUD operations for doctor and patient.
 
 ## Run the System
+
+Navigate through the project directory that is **../hospital-management** and run below commands
+
 We can easily run the whole with only a single command:
 ```bash
 docker-compose up
@@ -30,7 +33,8 @@ docker-compose down --rmi all
 **email**  - should be valid and contains special character ('@')\
 **contact number** - should be valid numeric
 
-**POST Api "hospital/doctor"** - to create doctor entity.
+### Doctor's API:
+**POST Api "http://localhost:8080/hospital/doctor"** - to create doctor entity.
 ```json
 {
  "name": "test_name",
@@ -48,8 +52,10 @@ docker-compose down --rmi all
    ]
 }
 ```
+```bash
+Note: Please create data beofre executing det and put request.
+```
 
-### Doctor's API:
 ###### Read and update
 **Get "http://localhost:8080/hospital/doctor"** - to get all doctors\
 **Get "http://localhost:8080/hospital/doctor/{id}"** -  to get doctor by id\
@@ -58,6 +64,9 @@ docker-compose down --rmi all
 **Delete "http://localhost:8080/hospital/doctor/{id}"** - to delete doctor by id and corresponding patients list(one to Many relationship)
 
 ### Patient's API:
+```bash
+Note: Creation of patient will be through doctor API as it is Many to one unidirectional relationship.
+```
 ###### Read and update
 **Get "http://localhost:8080/hospital/patients"** - to get all patients\
 **Get "http://localhost:8080/hospital//patient/{id}"** - to get patient by id\
