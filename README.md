@@ -53,7 +53,7 @@ docker-compose down --rmi all
 }
 ```
 ```bash
-Note: Please create data beofre executing det and put request.
+Note: Please create data beofre executing get/put and delete request.
 ```
 
 ###### Read and update
